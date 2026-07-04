@@ -226,7 +226,7 @@ const CATEGORY_META = {
     title: "居家能源",
     shortTitle: "居家",
     icon: "🏠",
-    color: "#2E7D32",
+    color: "#A3D900",
     desc: "用电、燃气和用水等日常资源消耗。",
   },
   transport: {
@@ -281,7 +281,8 @@ const REDUCTION_RATE = {
 };
 
 const ADVICE_MAP = {
-  electricity: "优先关注空调、照明和待机电器，养成随手关灯、合理设置空调温度、减少待机耗电的习惯。",
+  electricity:
+    "优先关注空调、照明和待机电器，养成随手关灯、合理设置空调温度、减少待机耗电的习惯。",
   gas: "减少不必要的长时间炖煮，合理使用热水和燃气设备，可降低居家能源排放。",
   water: "缩短淋浴时间，重复利用生活用水，及时修理漏水设施，有助于降低资源消耗。",
   car: "私家车排放贡献较高时，可优先考虑公共交通、拼车、骑行或步行替代短距离出行。",
@@ -365,8 +366,7 @@ function calculateCarbon(form) {
   const total = Object.values(categories).reduce((sum, value) => sum + value, 0);
   const annual = total * 12;
 
-  const categoryEntries = Object.entries(categories);
-  const highestCategoryEntry = categoryEntries
+  const highestCategoryEntry = Object.entries(categories)
     .filter(([, value]) => value > 0)
     .sort((a, b) => b[1] - a[1])[0];
 
@@ -630,9 +630,7 @@ export default function App() {
       </main>
 
       <footer className="footer no-print">
-        <p>
-          本系统用于绿色低碳生活科普、个人行为反思与实践展示，测算结果为估算值，仅供参考。
-        </p>
+        <p>本系统用于绿色低碳生活科普、个人行为反思与实践展示，测算结果为估算值，仅供参考。</p>
       </footer>
     </div>
   );
@@ -665,42 +663,22 @@ function HomePage({ setActivePage }) {
             <span>CO₂</span>
           </div>
           <h3>月度生活碳足迹估算</h3>
-          <p>
-            围绕居家能源、交通出行、饮食习惯和消费行为四类场景进行估算。
-          </p>
+          <p>围绕居家能源、交通出行、饮食习惯和消费行为四类场景进行估算。</p>
         </div>
       </section>
 
       <section className="grid four">
-        <FeatureCard
-          icon="🧮"
-          title="个人碳足迹测算"
-          text="输入月度生活行为数据，快速估算个人生活碳排放情况。"
-        />
-        <FeatureCard
-          icon="📊"
-          title="结构化结果解释"
-          text="通过环形图、分类占比和分项详情识别主要排放来源。"
-        />
-        <FeatureCard
-          icon="💡"
-          title="个性化减碳建议"
-          text="根据高贡献行为生成针对性绿色生活建议。"
-        />
-        <FeatureCard
-          icon="📅"
-          title="月度趋势记录"
-          text="保存不同月份测评结果，观察个人低碳行为变化。"
-        />
+        <FeatureCard icon="🧮" title="个人碳足迹测算" text="输入月度生活行为数据，快速估算个人生活碳排放情况。" />
+        <FeatureCard icon="📊" title="结构化结果解释" text="通过环形图、分类占比和分项详情识别主要排放来源。" />
+        <FeatureCard icon="💡" title="个性化减碳建议" text="根据高贡献行为生成针对性绿色生活建议。" />
+        <FeatureCard icon="📅" title="月度趋势记录" text="保存不同月份测评结果，观察个人低碳行为变化。" />
       </section>
 
       <section className="section">
         <div className="section-heading">
           <p className="eyebrow">Before You Use</p>
           <h2>使用前请了解</h2>
-          <p>
-            为了让测评结果更容易理解，系统提供了使用说明、计算说明和隐私说明。
-          </p>
+          <p>为了让测评结果更容易理解，系统提供了使用说明、计算说明和隐私说明。</p>
         </div>
 
         <div className="grid three">
@@ -737,9 +715,7 @@ function HomePage({ setActivePage }) {
       <section className="cta-section">
         <div>
           <h2>从一次测评开始，发现自己的低碳改善空间</h2>
-          <p>
-            绿色生活不是一次性行动，而是从高频生活习惯中逐步形成的长期改变。
-          </p>
+          <p>绿色生活不是一次性行动，而是从高频生活习惯中逐步形成的长期改变。</p>
         </div>
         <button className="primary-btn" onClick={() => setActivePage("calculator")}>
           立即开始
@@ -749,13 +725,7 @@ function HomePage({ setActivePage }) {
   );
 }
 
-function CalculatorPage({
-  form,
-  result,
-  updateForm,
-  handleCalculate,
-  handleResetForm,
-}) {
+function CalculatorPage({ form, result, updateForm, handleCalculate, handleResetForm }) {
   return (
     <div className="page">
       <section className="section compact">
@@ -855,12 +825,7 @@ function FormSection({ number, title, desc, fields, form, updateForm }) {
 
       <div className="input-grid">
         {fields.map((key) => (
-          <InputField
-            key={key}
-            fieldKey={key}
-            value={form[key]}
-            onChange={(value) => updateForm(key, value)}
-          />
+          <InputField key={key} fieldKey={key} value={form[key]} onChange={(value) => updateForm(key, value)} />
         ))}
       </div>
     </section>
@@ -901,9 +866,7 @@ function ResultReport({ result }) {
       <div className="section-heading left">
         <p className="eyebrow">Carbon Report</p>
         <h1>{formatMonth(result.month)}碳足迹报告</h1>
-        <p>
-          本报告从生活行为数据出发，展示月度碳足迹总量、结构分布、主要来源和减碳建议。
-        </p>
+        <p>本报告从生活行为数据出发，展示月度碳足迹总量、结构分布、主要来源和减碳建议。</p>
       </div>
 
       <div className="report-summary">
@@ -913,10 +876,9 @@ function ResultReport({ result }) {
             <p>
               你在 {formatMonth(result.month)} 的生活碳足迹约为
               <strong> {formatNumber(total, 2)} kgCO₂</strong>。
-              其中，
               {highestCategory ? (
                 <>
-                  <strong>{highestCategory.title}</strong> 是主要排放类别，占比约
+                  其中，<strong>{highestCategory.title}</strong> 是主要排放类别，占比约
                   <strong> {formatPercent(highestCategory.value, total)}%</strong>；
                 </>
               ) : null}
@@ -928,9 +890,7 @@ function ResultReport({ result }) {
               ) : null}
             </p>
           ) : (
-            <p>
-              当前月份未填写有效生活行为数据，因此暂无法形成主要排放来源分析。
-            </p>
+            <p>当前月份未填写有效生活行为数据，因此暂无法形成主要排放来源分析。</p>
           )}
         </div>
 
@@ -940,21 +900,9 @@ function ResultReport({ result }) {
       </div>
 
       <div className="result-overview">
-        <MetricCard
-          label="月度生活碳足迹"
-          value={`${formatNumber(result.total, 2)} kgCO₂`}
-          desc="根据本月生活行为估算"
-        />
-        <MetricCard
-          label="预计年度生活碳足迹"
-          value={`${formatNumber(result.annual, 2)} kgCO₂`}
-          desc="按当前月份水平乘以 12 估算"
-        />
-        <MetricCard
-          label="碳足迹画像"
-          value={result.profile.name}
-          desc={result.profile.level}
-        />
+        <MetricCard label="月度生活碳足迹" value={`${formatNumber(result.total, 2)} kgCO₂`} desc="根据本月生活行为估算" />
+        <MetricCard label="预计年度生活碳足迹" value={`${formatNumber(result.annual, 2)} kgCO₂`} desc="按当前月份水平乘以 12 估算" />
+        <MetricCard label="碳足迹画像" value={result.profile.name} desc={result.profile.level} />
       </div>
 
       <div className="profile-card">
@@ -972,12 +920,7 @@ function ResultReport({ result }) {
 
           <div className="category-bars">
             {Object.entries(result.categories).map(([key, value]) => (
-              <CategoryBar
-                key={key}
-                categoryKey={key}
-                value={value}
-                total={result.total}
-              />
+              <CategoryBar key={key} categoryKey={key} value={value} total={result.total} />
             ))}
           </div>
         </div>
@@ -992,8 +935,7 @@ function ResultReport({ result }) {
                     <strong>{item.label}</strong>
                     <span>
                       当前约 {formatNumber(item.emission, 2)} kgCO₂，
-                      若改善 {Math.round(item.rate * 100)}%，预计可减少{" "}
-                      {formatNumber(item.potential, 2)} kgCO₂。
+                      若改善 {Math.round(item.rate * 100)}%，预计可减少 {formatNumber(item.potential, 2)} kgCO₂。
                     </span>
                   </div>
                 </li>
@@ -1133,8 +1075,7 @@ function DetailBreakdown({ result }) {
                 {meta.icon} {meta.title}
               </h3>
               <span>
-                合计 {formatNumber(categoryTotal, 2)} kgCO₂，
-                占比 {formatPercent(categoryTotal, result.total)}%
+                合计 {formatNumber(categoryTotal, 2)} kgCO₂，占比 {formatPercent(categoryTotal, result.total)}%
               </span>
             </div>
 
@@ -1171,13 +1112,8 @@ function RecordsPage({
   const currentYear = String(new Date().getFullYear());
   const currentYearRecords = records.filter((record) => record.month.startsWith(currentYear));
 
-  const yearTotal = currentYearRecords.reduce(
-    (sum, record) => sum + record.result.total,
-    0
-  );
-
-  const yearAverage =
-    currentYearRecords.length > 0 ? yearTotal / currentYearRecords.length : 0;
+  const yearTotal = currentYearRecords.reduce((sum, record) => sum + record.result.total, 0);
+  const yearAverage = currentYearRecords.length > 0 ? yearTotal / currentYearRecords.length : 0;
 
   const highestRecord = currentYearRecords.length
     ? [...currentYearRecords].sort((a, b) => b.result.total - a.result.total)[0]
@@ -1193,9 +1129,7 @@ function RecordsPage({
         <div className="section-heading left">
           <p className="eyebrow">My Records</p>
           <h1>我的月度碳足迹记录</h1>
-          <p>
-            历史记录保存在当前浏览器本地，可用于观察个人绿色生活行为的月度变化。
-          </p>
+          <p>历史记录保存在当前浏览器本地，可用于观察个人绿色生活行为的月度变化。</p>
         </div>
 
         <div className="notice-card">
@@ -1206,28 +1140,12 @@ function RecordsPage({
         </div>
 
         <div className="record-stats">
-          <MetricCard
-            label={`${currentYear}年已记录月份`}
-            value={`${currentYearRecords.length} 个`}
-            desc="当前浏览器中保存的记录数量"
-          />
-          <MetricCard
-            label="年度累计碳足迹"
-            value={`${formatNumber(yearTotal, 2)} kgCO₂`}
-            desc="已记录月份结果合计"
-          />
-          <MetricCard
-            label="月均碳足迹"
-            value={`${formatNumber(yearAverage, 2)} kgCO₂`}
-            desc="按已记录月份计算"
-          />
+          <MetricCard label={`${currentYear}年已记录月份`} value={`${currentYearRecords.length} 个`} desc="当前浏览器中保存的记录数量" />
+          <MetricCard label="年度累计碳足迹" value={`${formatNumber(yearTotal, 2)} kgCO₂`} desc="已记录月份结果合计" />
+          <MetricCard label="月均碳足迹" value={`${formatNumber(yearAverage, 2)} kgCO₂`} desc="按已记录月份计算" />
           <MetricCard
             label="最高 / 最低月份"
-            value={
-              highestRecord && lowestRecord
-                ? `${formatMonth(highestRecord.month)} / ${formatMonth(lowestRecord.month)}`
-                : "暂无"
-            }
+            value={highestRecord && lowestRecord ? `${formatMonth(highestRecord.month)} / ${formatMonth(lowestRecord.month)}` : "暂无"}
             desc="用于识别波动较大的月份"
           />
         </div>
@@ -1259,9 +1177,7 @@ function RecordsPage({
                   </p>
                   <small>
                     主要来源：
-                    {record.result.highestCategory
-                      ? record.result.highestCategory.title
-                      : "暂无"}
+                    {record.result.highestCategory ? record.result.highestCategory.title : "暂无"}
                   </small>
                 </div>
 
@@ -1284,35 +1200,174 @@ function RecordsPage({
 function MonthlyTrendChart({ records }) {
   const months = getLastTwelveMonths();
   const map = new Map(records.map((record) => [record.month, record.result.total]));
-  const values = months.map((month) => map.get(month) || 0);
-  const max = Math.max(...values, 1);
+
+  const data = months.map((month) => ({
+    month,
+    value: map.has(month) ? map.get(month) : null,
+  }));
+
+  const validValues = data
+    .map((item) => item.value)
+    .filter((value) => typeof value === "number" && value > 0);
+
+  if (validValues.length === 0) {
+    return (
+      <div className="trend-card">
+        <div className="section-heading left small">
+          <h2>最近 12 个月趋势</h2>
+          <p>最近 12 个月暂无记录，完成测评后将自动生成趋势折线图。</p>
+        </div>
+      </div>
+    );
+  }
+
+  const width = 920;
+  const height = 320;
+  const paddingLeft = 60;
+  const paddingRight = 26;
+  const paddingTop = 26;
+  const paddingBottom = 72;
+
+  const maxValue = Math.max(...validValues, 1);
+
+  const points = data.map((item, index) => {
+    const x =
+      months.length === 1
+        ? width / 2
+        : paddingLeft + (index * (width - paddingLeft - paddingRight)) / (months.length - 1);
+
+    if (item.value === null) {
+      return {
+        x,
+        y: null,
+        month: item.month,
+        value: null,
+      };
+    }
+
+    const y = paddingTop + (1 - item.value / maxValue) * (height - paddingTop - paddingBottom);
+
+    return {
+      x,
+      y,
+      month: item.month,
+      value: item.value,
+    };
+  });
+
+  const segments = [];
+  let currentSegment = [];
+
+  points.forEach((point) => {
+    if (point.value === null) {
+      if (currentSegment.length >= 2) {
+        segments.push(currentSegment);
+      }
+      currentSegment = [];
+      return;
+    }
+
+    currentSegment.push(point);
+  });
+
+  if (currentSegment.length >= 2) {
+    segments.push(currentSegment);
+  }
 
   return (
     <div className="trend-card">
       <div className="section-heading left small">
         <h2>最近 12 个月趋势</h2>
-        <p>空心点表示该月份暂无记录。趋势图用于观察个人碳足迹变化方向。</p>
+        <p>
+          横轴为最近 12 个月的年月，纵轴为月度生活碳足迹估算值（kgCO₂）。
+          空心点表示该月暂无记录。
+        </p>
       </div>
 
-      <div className="trend-chart">
-        {months.map((month) => {
-          const value = map.get(month);
-          const height = value ? Math.max((value / max) * 100, 8) : 0;
+      <div className="trend-line-wrapper">
+        <svg viewBox={`0 0 ${width} ${height}`} className="trend-line-svg">
+          <line
+            x1={paddingLeft}
+            y1={height - paddingBottom}
+            x2={width - paddingRight}
+            y2={height - paddingBottom}
+            stroke="#d1d5db"
+            strokeWidth="2"
+          />
 
-          return (
-            <div className="trend-item" key={month}>
-              <div className="trend-bar-wrap">
-                {value ? (
-                  <div className="trend-bar" style={{ height: `${height}%` }} />
-                ) : (
-                  <div className="trend-empty-dot" />
-                )}
-              </div>
-              <span>{month.replace("-", "/")}</span>
-              <small>{value ? formatNumber(value, 0) : "—"}</small>
-            </div>
-          );
-        })}
+          <line
+            x1={paddingLeft}
+            y1={paddingTop}
+            x2={paddingLeft}
+            y2={height - paddingBottom}
+            stroke="#d1d5db"
+            strokeWidth="2"
+          />
+
+          <text x="10" y={paddingTop + 4} fontSize="12" fill="#6b7280">
+            {maxValue.toFixed(0)} kg
+          </text>
+
+          <text x="26" y={height - paddingBottom + 4} fontSize="12" fill="#6b7280">
+            0
+          </text>
+
+          {segments.map((segment, index) => {
+            const polylinePoints = segment.map((point) => `${point.x},${point.y}`).join(" ");
+
+            return (
+              <polyline
+                key={index}
+                points={polylinePoints}
+                fill="none"
+                stroke="#16a34a"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            );
+          })}
+
+          {points.map((point) => (
+            <g key={point.month}>
+              {point.value !== null ? (
+                <>
+                  <circle cx={point.x} cy={point.y} r="5" fill="#16a34a" />
+                  <text
+                    x={point.x}
+                    y={point.y - 10}
+                    textAnchor="middle"
+                    fontSize="12"
+                    fill="#14532d"
+                    fontWeight="bold"
+                  >
+                    {point.value.toFixed(0)}
+                  </text>
+                </>
+              ) : (
+                <circle
+                  cx={point.x}
+                  cy={height - paddingBottom}
+                  r="4"
+                  fill="white"
+                  stroke="#cbd5e1"
+                  strokeWidth="2"
+                />
+              )}
+
+              <text
+                x={point.x}
+                y={height - 26}
+                textAnchor="end"
+                fontSize="11"
+                fill="#4b5563"
+                transform={`rotate(-35 ${point.x} ${height - 26})`}
+              >
+                {point.month}
+              </text>
+            </g>
+          ))}
+        </svg>
       </div>
     </div>
   );
@@ -1325,9 +1380,7 @@ function KnowledgePage() {
         <div className="section-heading left">
           <p className="eyebrow">Knowledge</p>
           <h1>绿色低碳生活科普</h1>
-          <p>
-            低碳生活不是牺牲生活质量，而是在能源、出行、饮食和消费中做出更理性的选择。
-          </p>
+          <p>低碳生活不是牺牲生活质量，而是在能源、出行、饮食和消费中做出更理性的选择。</p>
         </div>
 
         <KnowledgeSection
